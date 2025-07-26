@@ -4,28 +4,28 @@ import Footer from '@/components/Footer';
 const Work = () => {
   const categories = [
     {
-      title: 'Paintings',
-      description: 'Original acrylic and oil paintings',
-      image: '/src/assets/painting-1.jpg',
-      href: '/work/paintings'
+      title: 'Exhibitions',
+      description: 'Curated gallery exhibitions and shows',
+      image: '/lovable-uploads/609cb6fa-3b36-4459-8991-a954aac943ca.png',
+      href: '/work/exhibitions'
     },
     {
-      title: 'Photography',
-      description: 'Fine art photography prints',
-      image: '/src/assets/photo-1.jpg',
-      href: '/work/photography'
-    },
-    {
-      title: 'Sculptures',
-      description: 'Handcrafted sculptural pieces',
-      image: '/src/assets/sculpture-1.jpg',
-      href: '/work/sculptures'
+      title: 'Digital',
+      description: 'Digital art and photography',
+      image: '/lovable-uploads/f08a1944-4b3b-401f-ab20-2f7eb5aa9589.png',
+      href: '/work/digital'
     },
     {
       title: 'Crafts',
-      description: 'Textile and mixed media works',
-      image: '/src/assets/hero-artwork.jpg',
+      description: 'Handcrafted sculptural and textile works',
+      image: '/lovable-uploads/04ae5092-394f-47d6-983b-dbfc48fa6dcb.png',
       href: '/work/crafts'
+    },
+    {
+      title: 'Paintings',
+      description: 'Original acrylic and oil paintings',
+      image: '/lovable-uploads/50c9cae5-a3b8-4355-b9ac-47d62cdc49ef.png',
+      href: '/work/paintings'
     }
   ];
 
