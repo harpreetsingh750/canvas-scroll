@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingCart } from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
+    { name: 'Home', href: '/' },
     { name: 'Work', href: '/work' },
     { name: 'Shop', href: '/shop' },
     { name: 'Info', href: '/info' },
@@ -22,27 +23,38 @@ const Navigation = () => {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
-              >
-                {item.name}
-              </a>
-            ))}
+          <div className="hidden md:flex items-center space-x-8">
+            <div className="flex space-x-8">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            
+            {/* Cart Icon */}
+            <Button variant="ghost" size="sm" className="p-2">
+              <ShoppingCart size={18} />
+            </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </Button>
+          {/* Mobile Menu Button & Cart */}
+          <div className="md:hidden flex items-center space-x-2">
+            <Button variant="ghost" size="sm" className="p-2">
+              <ShoppingCart size={18} />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
