@@ -52,6 +52,86 @@ const Shop = () => {
       image: '/src/assets/photo-1.jpg',
       size: '8" x 12"',
       medium: 'Digital art print'
+    },
+    {
+      id: 7,
+      title: 'Sphinx #001',
+      category: 'digital',
+      subcategory: 'sphinx',
+      price: 149,
+      image: '/lovable-uploads/b52f851e-4581-4a2c-84c2-b7495203caec.png',
+      size: '16" x 20"',
+      medium: 'Digital shadow art print'
+    },
+    {
+      id: 8,
+      title: 'Sphinx #002',
+      category: 'digital',
+      subcategory: 'sphinx',
+      price: 129,
+      image: '/lovable-uploads/a8f02229-7d1c-4920-8ba0-1d859b4aecd4.png',
+      size: '16" x 20"',
+      medium: 'Digital shadow art print'
+    },
+    {
+      id: 9,
+      title: 'Sphinx #003',
+      category: 'digital',
+      subcategory: 'sphinx',
+      price: 179,
+      image: '/lovable-uploads/d82dc057-10de-482d-9edf-0e0daac7cd6c.png',
+      size: '16" x 20"',
+      medium: 'Digital shadow art print'
+    },
+    {
+      id: 10,
+      title: 'Sphinx #004',
+      category: 'digital',
+      subcategory: 'sphinx',
+      price: 99,
+      image: '/lovable-uploads/2b91f7a0-2c3c-4f21-8a7c-38dff5cf6e9f.png',
+      size: '12" x 16"',
+      medium: 'Digital shadow art print'
+    },
+    {
+      id: 11,
+      title: 'Sphinx #005',
+      category: 'digital',
+      subcategory: 'sphinx',
+      price: 159,
+      image: '/lovable-uploads/20236b5a-f883-4a1c-baae-81e01a100123.png',
+      size: '16" x 20"',
+      medium: 'Digital shadow art print'
+    },
+    {
+      id: 12,
+      title: 'Sphinx #006',
+      category: 'digital',
+      subcategory: 'sphinx',
+      price: 189,
+      image: '/lovable-uploads/14c08dfd-d7be-4cb3-96a3-b611f3eca036.png',
+      size: '16" x 20"',
+      medium: 'Digital shadow art print'
+    },
+    {
+      id: 13,
+      title: 'Sphinx #007',
+      category: 'digital',
+      subcategory: 'sphinx',
+      price: 139,
+      image: '/lovable-uploads/3e8d034f-4892-4992-ab4f-266826ab2e5f.png',
+      size: '16" x 20"',
+      medium: 'Digital shadow art print'
+    },
+    {
+      id: 14,
+      title: 'Sphinx #008',
+      category: 'digital',
+      subcategory: 'sphinx',
+      price: 169,
+      image: '/lovable-uploads/3f9a4845-27ba-40fa-80fc-432df08da256.png',
+      size: '16" x 20"',
+      medium: 'Digital shadow art print'
     }
   ];
 
