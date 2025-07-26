@@ -55,7 +55,7 @@ const Shop = () => {
     },
     {
       id: 7,
-      title: 'Sphinx #001',
+      title: 'Sphinx #002',
       category: 'digital',
       subcategory: 'sphinx',
       price: 149,
@@ -65,7 +65,7 @@ const Shop = () => {
     },
     {
       id: 8,
-      title: 'Sphinx #002',
+      title: 'Sphinx #003',
       category: 'digital',
       subcategory: 'sphinx',
       price: 129,
@@ -75,7 +75,7 @@ const Shop = () => {
     },
     {
       id: 9,
-      title: 'Sphinx #003',
+      title: 'Sphinx #004',
       category: 'digital',
       subcategory: 'sphinx',
       price: 179,
@@ -85,7 +85,7 @@ const Shop = () => {
     },
     {
       id: 10,
-      title: 'Sphinx #004',
+      title: 'Sphinx #5.2',
       category: 'digital',
       subcategory: 'sphinx',
       price: 99,
