@@ -60,7 +60,9 @@ const Work = () => {
                     <img
                       src={category.image}
                       alt={category.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className={`w-full h-full transition-transform duration-700 group-hover:scale-110 ${
+                        category.title === 'Crafts' ? 'object-contain bg-card' : 'object-cover'
+                      }`}
                     />
                   </div>
                   <div className="p-8">
