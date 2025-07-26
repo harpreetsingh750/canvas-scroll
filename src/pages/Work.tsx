@@ -66,12 +66,9 @@ const Work = () => {
                     />
                   </div>
                   <div className="p-8">
-                    <h3 className="font-playfair text-2xl font-medium mb-3 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="font-playfair text-2xl font-medium group-hover:text-primary transition-colors duration-300">
                       {category.title}
                     </h3>
-                    <p className="text-foreground/70 leading-relaxed">
-                      {category.description}
-                    </p>
                   </div>
                 </a>
               ))}
