@@ -1,16 +1,35 @@
-import heroArtwork from '@/assets/hero-artwork.jpg';
+import { useEffect, useRef } from 'react';
 
 const HeroSection = () => {
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (imageRef.current) {
+        const scrolled = window.pageYOffset;
+        const parallax = scrolled * 0.2;
+        const zoom = 1 + scrolled * 0.0003;
+        
+        imageRef.current.style.transform = `translateY(${parallax}px) scale(${zoom})`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Hero Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src={heroArtwork}
+          ref={imageRef}
+          src="/lovable-uploads/d278b0f7-7b9c-4f99-8a09-22cae238a691.png"
           alt="Featured Artwork"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center transition-transform duration-75"
         />
-        <div className="absolute inset-0 bg-charcoal/20"></div>
+        <div className="absolute inset-0 bg-charcoal/30"></div>
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-charcoal/60"></div>
       </div>
 
       {/* Content */}
