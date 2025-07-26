@@ -19,9 +19,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32">
-      {/* White padding at top */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-white z-10"></div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Hero Image */}
       <div className="absolute inset-0 z-0">
         <img
