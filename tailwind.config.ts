@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'playfair': ['Playfair Display', 'serif'],
+				'inter': ['Inter', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,7 +65,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom gallery colors
+				'gallery-white': 'hsl(var(--gallery-white))',
+				'charcoal': 'hsl(var(--charcoal))',
+				'warm-gray': 'hsl(var(--warm-gray))',
+				'gold': 'hsl(var(--gold))',
+				'gold-light': 'hsl(var(--gold-light))',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -1,42 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Gallery-inspired design system for artist portfolio */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Gallery aesthetic - clean whites and deep blacks */
+    --background: 0 0% 99%;
+    --foreground: 0 0% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 8%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Deep charcoal for primary elements */
+    --primary: 0 0% 8%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Warm grays for secondary elements */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Subtle grays for muted content */
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Gold accent for highlights */
+    --accent: 45 100% 88%;
+    --accent-foreground: 0 0% 8%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 90%;
+    --input: 0 0% 94%;
+    --ring: 0 0% 8%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
+
+    /* Custom design tokens */
+    --gallery-white: 0 0% 99%;
+    --charcoal: 0 0% 8%;
+    --warm-gray: 0 0% 50%;
+    --gold: 45 100% 75%;
+    --gold-light: 45 100% 88%;
+    
+    /* Gradients */
+    --gradient-fade: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.8) 100%);
+    --gradient-overlay: linear-gradient(135deg, hsl(var(--charcoal) / 0.1) 0%, hsl(var(--charcoal) / 0.05) 100%);
+    
+    /* Shadows */
+    --shadow-artwork: 0 8px 40px -12px hsl(var(--charcoal) / 0.15);
+    --shadow-card: 0 4px 20px -8px hsl(var(--charcoal) / 0.1);
+    --shadow-subtle: 0 2px 10px -4px hsl(var(--charcoal) / 0.08);
+    
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-fast: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +125,37 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+}
+
+@layer components {
+  /* Gallery-specific components */
+  .artwork-hover {
+    @apply transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-[var(--shadow-artwork)];
+  }
+  
+  .smooth-reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+  
+  .smooth-reveal.revealed {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .gallery-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12;
+  }
+  
+  .hero-text {
+    @apply text-4xl md:text-6xl lg:text-7xl font-playfair font-light tracking-tight leading-[0.9];
+  }
+  
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-20 xl:px-32;
   }
 }
