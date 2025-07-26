@@ -24,12 +24,12 @@ const HeroSection = () => {
       <div className="absolute inset-0 z-0">
         <img
           ref={imageRef}
-          src="/lovable-uploads/d278b0f7-7b9c-4f99-8a09-22cae238a691.png"
+          src="/lovable-uploads/c2fbcf5f-66ab-4a07-b3c4-6f5a1c6e5222.png"
           alt="Featured Artwork"
           className="w-full h-full object-cover object-center transition-transform duration-75"
         />
         <div className="absolute inset-0 bg-charcoal/30"></div>
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-charcoal/60"></div>
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-charcoal/30"></div>
       </div>
 
       {/* Content */}
