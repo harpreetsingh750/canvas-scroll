@@ -45,17 +45,31 @@ const Info = () => {
                   </p>
                 </div>
                 
-                {/* Instagram Link */}
-                <div className="pt-6">
-                  <Button 
-                    variant="outline" 
-                    className="group"
-                    onClick={() => window.open('https://instagram.com/kjarts', '_blank')}
-                  >
-                    <Instagram className="mr-2 h-4 w-4" />
-                    Follow on Instagram
-                    <ExternalLink className="ml-2 h-3 w-3 opacity-50 group-hover:opacity-100 transition-opacity" />
-                  </Button>
+                {/* Instagram Links */}
+                <div className="pt-6 space-y-4">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Instagram className="h-6 w-6 text-foreground/70" />
+                    <span className="text-lg font-medium">Follow on Instagram</span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <a 
+                      href="https://www.instagram.com/komaljayveerphotography/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-primary hover:text-primary/80 transition-colors underline"
+                    >
+                      @komaljayveerphotography
+                    </a>
+                    <a 
+                      href="https://www.instagram.com/komaljayveer/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-primary hover:text-primary/80 transition-colors underline"
+                    >
+                      @komaljayveer
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
