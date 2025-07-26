@@ -6,7 +6,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
             {/* Brand */}
             <div>
-              <h3 className="font-playfair text-2xl mb-6">Studio</h3>
+              <h3 className="font-playfair text-2xl mb-6">KJ Arts</h3>
               <p className="text-white/70 leading-relaxed mb-6">
                 Contemporary art and sculpture exploring the intersection of 
                 traditional craftsmanship and modern expression.
@@ -46,11 +46,11 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div>
-              <h4 className="font-medium text-sm tracking-wide uppercase mb-6">Studio</h4>
+              <h4 className="font-medium text-sm tracking-wide uppercase mb-6">Contact</h4>
               <div className="space-y-3 text-white/70">
                 <p>Available for commissions</p>
                 <p>Worldwide shipping</p>
-                <p>hello@studio.com</p>
+                <p>hello@kjarts.com</p>
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@ const Footer = () => {
           {/* Bottom Bar */}
           <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-white/50 text-sm">
-              © 2024 Studio. All rights reserved.
+              © 2024 KJ Arts. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="text-white/50 hover:text-white/70 text-sm transition-colors duration-300">

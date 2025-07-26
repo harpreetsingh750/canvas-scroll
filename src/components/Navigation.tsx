@@ -18,7 +18,7 @@ const Navigation = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <a href="/" className="font-playfair text-2xl font-medium tracking-wide">
-            Studio
+            KJ Arts
           </a>
 
           {/* Desktop Navigation */}
