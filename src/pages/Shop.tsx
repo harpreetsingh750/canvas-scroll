@@ -20,20 +20,11 @@ const Shop = () => {
     {
       id: 2,
       title: 'Urban Reflection',
-      category: 'photography',
+      category: 'digital',
       price: 120,
       image: '/src/assets/photo-1.jpg',
       size: '12" x 18"',
-      medium: 'Fine art print'
-    },
-    {
-      id: 3,
-      title: 'Stone Balance',
-      category: 'sculpture',
-      price: 1200,
-      image: '/src/assets/sculpture-1.jpg',
-      size: '8" x 6" x 10"',
-      medium: 'Mixed media'
+      medium: 'Digital art print'
     },
     {
       id: 4,
@@ -56,19 +47,18 @@ const Shop = () => {
     {
       id: 6,
       title: 'City Lines',
-      category: 'photography',
+      category: 'digital',
       price: 95,
       image: '/src/assets/photo-1.jpg',
       size: '8" x 12"',
-      medium: 'Fine art print'
+      medium: 'Digital art print'
     }
   ];
 
   const categories = [
-    { key: 'all', label: 'All Works' },
+    { key: 'all', label: 'View All' },
     { key: 'painting', label: 'Paintings' },
-    { key: 'photography', label: 'Photography' },
-    { key: 'sculpture', label: 'Sculptures' },
+    { key: 'digital', label: 'Digital' },
     { key: 'craft', label: 'Crafts' }
   ];
 
