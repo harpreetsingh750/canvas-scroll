@@ -24,7 +24,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 z-0">
         <img
           ref={imageRef}
-          src="/lovable-uploads/f00fc9af-9c75-48d9-929c-7638f7b9dd4a.png"
+          src="/lovable-uploads/f45eba49-c3a3-4721-a597-50182fe756e4.png"
           alt="Featured Artwork"
           className="w-full h-full object-cover object-center transition-transform duration-75"
         />
