@@ -59,6 +59,12 @@
     --shadow-card: 0 4px 20px -8px hsl(var(--charcoal) / 0.1);
     --shadow-subtle: 0 2px 10px -4px hsl(var(--charcoal) / 0.08);
     
+    /* Claymorphism tokens */
+    --surface-highlight: 0 0% 100%;
+    --clay-shadow-outer: 12px 12px 28px hsl(var(--charcoal) / 0.35), -12px -12px 28px hsl(var(--surface-highlight) / 0.08);
+    --clay-shadow-outer-hover: 8px 8px 20px hsl(var(--charcoal) / 0.3), -8px -8px 20px hsl(var(--surface-highlight) / 0.06);
+    --clay-shadow-inset: inset 2px 2px 6px hsl(var(--charcoal) / 0.35), inset -2px -2px 6px hsl(var(--surface-highlight) / 0.06);
+    
     /* Transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     --transition-fast: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -203,6 +209,30 @@
   .liquid-divider.active::before,
   .liquid-divider.active::after {
     animation-play-state: running;
+  }
+
+  /* Claymorphic utilities */
+  .clay {
+    background-color: hsl(var(--card));
+    border-radius: var(--radius);
+    box-shadow: var(--clay-shadow-outer);
+    transition: var(--transition-smooth), transform var(--transition-fast);
+  }
+  .clay-pressable {
+    transform: translateZ(0);
+  }
+  .clay-pressable:hover {
+    box-shadow: var(--clay-shadow-outer-hover);
+    transform: translateY(-1px) scale(1.01);
+  }
+  .clay-pressable:active {
+    box-shadow: var(--clay-shadow-inset);
+    transform: translateY(1px) scale(0.99);
+  }
+  .clay-input {
+    background-color: hsl(var(--card));
+    box-shadow: var(--clay-shadow-inset);
+    border-color: transparent;
   }
 
   @keyframes morph-wave {
