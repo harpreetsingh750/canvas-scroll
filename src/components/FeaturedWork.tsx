@@ -1,6 +1,7 @@
 import sculptureImage from '@/assets/sculpture-1.jpg';
 import paintingImage from '@/assets/painting-1.jpg';
 import photoImage from '@/assets/photo-1.jpg';
+import AnimatedUnderlineHeading from '@/components/AnimatedUnderlineHeading';
 
 const FeaturedWork = () => {
   const artworks = [
@@ -32,9 +33,11 @@ const FeaturedWork = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-4xl md:text-5xl font-playfair font-light mb-6 smooth-reveal">
-            Featured Work
-          </h2>
+          <AnimatedUnderlineHeading
+            text="Featured Work"
+            level="h2"
+            className="text-4xl md:text-5xl font-playfair font-light mb-6 smooth-reveal"
+          />
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto smooth-reveal">
             A curated selection of recent pieces exploring contemporary themes through traditional craftsmanship
           </p>

@@ -1,3 +1,4 @@
+import AnimatedUnderlineHeading from '@/components/AnimatedUnderlineHeading';
 const AboutSection = () => {
   return (
     <section className="py-24 md:py-32 bg-muted/30">
@@ -6,11 +7,11 @@ const AboutSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Text Content */}
             <div className="smooth-reveal">
-              <h2 className="text-4xl md:text-5xl font-playfair font-light mb-8">
-                Creating with
-                <br />
-                <span className="italic">intention & soul</span>
-              </h2>
+              <AnimatedUnderlineHeading
+                text="Creating with intention & soul"
+                level="h2"
+                className="text-4xl md:text-5xl font-playfair font-light mb-8"
+              />
               <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
                 <p>
                   Each piece begins as a conversation between material and vision, 
