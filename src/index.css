@@ -8,60 +8,73 @@
 
 @layer base {
   :root {
-    /* Gallery aesthetic - clean whites and deep blacks */
-    --background: 0 0% 99%;
-    --foreground: 0 0% 8%;
+    /* Dark Neumorphic theme with artistic hints */
+    --background: 240 8% 12%;
+    --foreground: 40 15% 90%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 8%;
+    --card: 240 8% 14%;
+    --card-foreground: 40 15% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 8%;
+    --popover: 240 8% 14%;
+    --popover-foreground: 40 15% 90%;
 
-    /* Deep charcoal for primary elements */
-    --primary: 0 0% 8%;
-    --primary-foreground: 0 0% 98%;
+    /* Deep purple-gray for primary elements */
+    --primary: 260 25% 35%;
+    --primary-foreground: 40 15% 95%;
 
-    /* Warm grays for secondary elements */
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 15%;
+    /* Elevated surface for secondary elements */
+    --secondary: 240 8% 16%;
+    --secondary-foreground: 40 15% 85%;
 
-    /* Subtle grays for muted content */
-    --muted: 0 0% 95%;
-    --muted-foreground: 0 0% 45%;
+    /* Recessed areas for muted content */
+    --muted: 240 8% 10%;
+    --muted-foreground: 40 10% 65%;
 
-    /* Gold accent for highlights */
-    --accent: 45 100% 88%;
-    --accent-foreground: 0 0% 8%;
+    /* Artistic gold accent */
+    --accent: 45 85% 60%;
+    --accent-foreground: 240 8% 12%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 40 15% 95%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 94%;
-    --ring: 0 0% 8%;
+    --border: 240 8% 18%;
+    --input: 240 8% 16%;
+    --ring: 260 25% 45%;
 
-    --radius: 0.25rem;
+    --radius: 0.75rem;
 
-    /* Custom design tokens */
-    --gallery-white: 0 0% 99%;
-    --charcoal: 0 0% 8%;
-    --warm-gray: 0 0% 50%;
-    --gold: 45 100% 75%;
-    --gold-light: 45 100% 88%;
+    /* Custom neumorphic design tokens */
+    --surface-dark: 240 8% 12%;
+    --surface-raised: 240 8% 14%;
+    --surface-inset: 240 8% 10%;
+    --artistic-gold: 45 85% 60%;
+    --artistic-purple: 260 25% 35%;
+    --warm-highlight: 40 15% 85%;
     
-    /* Gradients */
-    --gradient-fade: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.8) 100%);
-    --gradient-overlay: linear-gradient(135deg, hsl(var(--charcoal) / 0.1) 0%, hsl(var(--charcoal) / 0.05) 100%);
+    /* Neumorphic gradients */
+    --gradient-raised: linear-gradient(135deg, hsl(var(--surface-raised)) 0%, hsl(240 8% 13%) 100%);
+    --gradient-inset: linear-gradient(135deg, hsl(var(--surface-inset)) 0%, hsl(240 8% 11%) 100%);
+    --gradient-artistic: linear-gradient(135deg, hsl(var(--artistic-purple)) 0%, hsl(260 25% 25%) 100%);
     
-    /* Shadows */
-    --shadow-artwork: 0 8px 40px -12px hsl(var(--charcoal) / 0.15);
-    --shadow-card: 0 4px 20px -8px hsl(var(--charcoal) / 0.1);
-    --shadow-subtle: 0 2px 10px -4px hsl(var(--charcoal) / 0.08);
+    /* Neumorphic shadows */
+    --shadow-raised: 
+      8px 8px 16px hsl(240 8% 8% / 0.4),
+      -8px -8px 16px hsl(240 8% 16% / 0.1);
+    --shadow-inset: 
+      inset 4px 4px 8px hsl(240 8% 8% / 0.3),
+      inset -4px -4px 8px hsl(240 8% 16% / 0.1);
+    --shadow-artwork: 
+      12px 12px 24px hsl(240 8% 6% / 0.5),
+      -4px -4px 12px hsl(240 8% 18% / 0.2);
+    --shadow-card: 
+      6px 6px 12px hsl(240 8% 8% / 0.3),
+      -6px -6px 12px hsl(240 8% 16% / 0.1);
+    --shadow-glow: 0 0 20px hsl(var(--artistic-gold) / 0.3);
     
-    /* Transitions */
+    /* Artistic transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     --transition-fast: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -81,41 +94,43 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Even deeper neumorphic theme for dark mode */
+    --background: 240 10% 8%;
+    --foreground: 40 20% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 10% 10%;
+    --card-foreground: 40 20% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 10% 10%;
+    --popover-foreground: 40 20% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 260 30% 40%;
+    --primary-foreground: 40 20% 98%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 10% 12%;
+    --secondary-foreground: 40 20% 90%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 10% 6%;
+    --muted-foreground: 40 15% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 90% 65%;
+    --accent-foreground: 240 10% 8%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 40 20% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 240 10% 14%;
+    --input: 240 10% 12%;
+    --ring: 260 30% 50%;
+    
+    --sidebar-background: 240 10% 8%;
+    --sidebar-foreground: 40 20% 95%;
+    --sidebar-primary: 260 30% 40%;
+    --sidebar-primary-foreground: 40 20% 98%;
+    --sidebar-accent: 240 10% 12%;
+    --sidebar-accent-foreground: 40 20% 90%;
+    --sidebar-border: 240 10% 14%;
+    --sidebar-ring: 260 30% 50%;
   }
 }
 
@@ -134,13 +149,20 @@
 }
 
 @layer components {
-  /* Gallery-specific components */
+  /* Neumorphic gallery components with artistic hints */
   .artwork-hover {
-    @apply transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-[var(--shadow-artwork)];
+    @apply transition-all duration-500 ease-out hover:scale-[1.02];
+    box-shadow: var(--shadow-raised);
+  }
+  
+  .artwork-hover:hover {
+    box-shadow: var(--shadow-artwork), var(--shadow-glow);
+    transform: scale(1.02) translateY(-2px);
   }
   
   .smooth-reveal {
-    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+    @apply opacity-0 translate-y-8;
+    transition: var(--transition-bounce);
   }
   
   .smooth-reveal.revealed {
@@ -153,6 +175,10 @@
   
   .hero-text {
     @apply text-4xl md:text-6xl lg:text-7xl font-playfair font-light tracking-tight leading-[0.9];
+    background: var(--gradient-artistic);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .section-padding {
@@ -160,6 +186,32 @@
   }
 
   .bg-gradient-radial {
-    background: radial-gradient(circle at center, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
+    background: radial-gradient(circle at center, hsl(var(--surface-dark)) 0%, hsl(var(--surface-inset)) 100%);
+  }
+  
+  /* Neumorphic surface styles */
+  .surface-raised {
+    background: var(--gradient-raised);
+    box-shadow: var(--shadow-raised);
+    border: 1px solid hsl(var(--border));
+  }
+  
+  .surface-inset {
+    background: var(--gradient-inset);
+    box-shadow: var(--shadow-inset);
+  }
+  
+  .artistic-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .neumorphic-card {
+    @apply surface-raised rounded-xl backdrop-blur-sm;
+    transition: var(--transition-smooth);
+  }
+  
+  .neumorphic-card:hover {
+    @apply artistic-glow;
+    transform: translateY(-4px);
   }
 }
