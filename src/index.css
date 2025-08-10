@@ -162,4 +162,60 @@
   .bg-gradient-radial {
     background: radial-gradient(circle at center, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
   }
+
+  /* Liquid morphing divider */
+  .liquid-divider {
+    position: relative;
+    height: 120px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .liquid-divider::before,
+  .liquid-divider::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 160%;
+    transform: translateY(-20%);
+    /* Use semantic tokens for subtle gradient */
+    background: linear-gradient(
+      180deg,
+      hsl(var(--accent) / 0.15) 0%,
+      hsl(var(--accent) / 0.08) 35%,
+      hsl(var(--primary) / 0.06) 100%
+    );
+    filter: drop-shadow(0 10px 30px hsl(var(--charcoal) / 0.15));
+    will-change: clip-path, transform;
+    animation: morph-wave 10s ease-in-out infinite paused;
+  }
+  .liquid-divider::after {
+    opacity: 0.6;
+    animation-duration: 14s;
+    animation-delay: -4s;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--accent) / 0.12) 0%,
+      hsl(var(--accent) / 0.06) 35%,
+      hsl(var(--primary) / 0.05) 100%
+    );
+  }
+  .liquid-divider.active::before,
+  .liquid-divider.active::after {
+    animation-play-state: running;
+  }
+
+  @keyframes morph-wave {
+    0% {
+      /* Gentle wave */
+      clip-path: polygon(0% 60%, 8% 55%, 18% 58%, 28% 53%, 38% 56%, 48% 52%, 58% 57%, 68% 54%, 78% 59%, 88% 55%, 100% 60%, 100% 100%, 0 100%);
+    }
+    50% {
+      /* Organic stretch */
+      clip-path: polygon(0% 62%, 8% 58%, 18% 52%, 28% 57%, 38% 50%, 48% 58%, 58% 53%, 68% 60%, 78% 52%, 88% 58%, 100% 62%, 100% 100%, 0 100%);
+    }
+    100% {
+      clip-path: polygon(0% 60%, 8% 55%, 18% 58%, 28% 53%, 38% 56%, 48% 52%, 58% 57%, 68% 54%, 78% 59%, 88% 55%, 100% 60%, 100% 100%, 0 100%);
+    }
+  }
 }

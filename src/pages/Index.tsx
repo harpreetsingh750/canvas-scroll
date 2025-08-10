@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection';
 import FeaturedWork from '@/components/FeaturedWork';
 import AboutSection from '@/components/AboutSection';
 import Footer from '@/components/Footer';
+import LiquidDivider from '@/components/LiquidDivider';
 
 const Index = () => {
   // Reveal animations on scroll
@@ -30,7 +31,9 @@ const Index = () => {
       <Navigation />
       <main>
         <HeroSection />
+        <LiquidDivider />
         <FeaturedWork />
+        <LiquidDivider />
         <AboutSection />
       </main>
       <Footer />
