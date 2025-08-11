@@ -21,8 +21,10 @@ const Info = () => {
               <div className="order-2 lg:order-1">
                 <div className="aspect-[3/4] overflow-hidden rounded-lg bg-muted">
                   <img
-                    src="/src/assets/hero-artwork.jpg"
-                    alt="Artist Portrait"
+                    src="/lovable-uploads/583e75ed-7514-4a3e-b113-ef949e079211.png"
+                    alt="Artist portrait in studio with monochrome abstract paintings"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
