@@ -1,32 +1,51 @@
-import sculptureImage from '@/assets/sculpture-1.jpg';
-import paintingImage from '@/assets/painting-1.jpg';
-import photoImage from '@/assets/photo-1.jpg';
+import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 import AnimatedUnderlineHeading from '@/components/AnimatedUnderlineHeading';
 
+interface Product {
+  id: string;
+  title: string;
+  description?: string;
+  price: number;
+  category: string;
+  image_url?: string;
+  image_path?: string;
+  is_featured: boolean;
+  on_sale: boolean;
+  location?: string;
+  created_at: string;
+  updated_at: string;
+}
+
 const FeaturedWork = () => {
-  const artworks = [
-    {
-      id: 1,
-      title: "Bronze Meditation",
-      category: "Sculpture",
-      image: sculptureImage,
-      price: "$2,400"
-    },
-    {
-      id: 2,
-      title: "Earth & Gold",
-      category: "Painting",
-      image: paintingImage,
-      price: "$1,800"
-    },
-    {
-      id: 3,
-      title: "Light Studies II",
-      category: "Photography",
-      image: photoImage,
-      price: "$600"
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchFeaturedProducts();
+  }, []);
+
+  const fetchFeaturedProducts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .limit(3);
+
+      if (error) {
+        console.error('Error fetching products:', error);
+        return;
+      }
+
+      // Shuffle the products and take the first 3
+      const shuffled = data ? [...data].sort(() => 0.5 - Math.random()) : [];
+      setProducts(shuffled.slice(0, 3));
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
   return (
     <section className="py-24 md:py-32 section-padding">
@@ -45,43 +64,52 @@ const FeaturedWork = () => {
 
         {/* Gallery Grid */}
         <div className="gallery-grid">
-          {artworks.map((artwork, index) => (
-            <div
-              key={artwork.id}
-              className="group smooth-reveal"
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
-              <div className="relative overflow-hidden bg-muted artwork-hover">
-                <img
-                  src={artwork.image}
-                  alt={artwork.title}
-                  className="w-full aspect-square object-cover"
-                />
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-all duration-500 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-center text-white">
-                    <button className="px-6 py-2 border border-white/50 text-sm tracking-wide uppercase hover:bg-white/10 transition-colors duration-300">
-                      View Details
-                    </button>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Artwork Info */}
-              <div className="mt-6 space-y-2">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="font-playfair text-xl mb-1">{artwork.title}</h3>
-                    <p className="text-muted-foreground text-sm tracking-wide uppercase">
-                      {artwork.category}
-                    </p>
-                  </div>
-                  <p className="font-medium text-lg">{artwork.price}</p>
-                </div>
-              </div>
+          {loading ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground">Loading featured work...</p>
             </div>
-          ))}
+          ) : products.length === 0 ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground">No featured work available</p>
+            </div>
+          ) : (
+            products.map((product, index) => (
+              <div
+                key={product.id}
+                className="group smooth-reveal"
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                <div className="relative overflow-hidden bg-muted artwork-hover">
+                  <img
+                    src={product.image_url || product.image_path || '/placeholder.svg'}
+                    alt={product.title}
+                    className="w-full aspect-square object-cover"
+                  />
+                  
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-all duration-500 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-center text-white">
+                      <button className="px-6 py-2 border border-white/50 text-sm tracking-wide uppercase hover:bg-white/10 transition-colors duration-300">
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Artwork Info */}
+                <div className="mt-6 space-y-2">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-playfair text-xl mb-1">{product.title}</h3>
+                      <p className="text-muted-foreground text-sm tracking-wide uppercase">
+                        {product.category}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         {/* View All Link */}
