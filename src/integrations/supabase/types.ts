@@ -23,6 +23,7 @@ export type Database = {
           image_path: string | null
           image_url: string | null
           is_featured: boolean | null
+          location: string | null
           price: number
           title: string
           updated_at: string
@@ -35,6 +36,7 @@ export type Database = {
           image_path?: string | null
           image_url?: string | null
           is_featured?: boolean | null
+          location?: string | null
           price: number
           title: string
           updated_at?: string
@@ -47,6 +49,7 @@ export type Database = {
           image_path?: string | null
           image_url?: string | null
           is_featured?: boolean | null
+          location?: string | null
           price?: number
           title?: string
           updated_at?: string
