@@ -5,9 +5,15 @@ const Work = () => {
   const categories = [
     {
       title: 'Exhibitions',
-      description: 'Curated gallery exhibitions and shows',
+      description: 'Curated gallery exhibitions and shows by location',
       image: '/lovable-uploads/609cb6fa-3b36-4459-8991-a954aac943ca.png',
-      href: '/work/exhibitions'
+      href: '/work/exhibitions',
+      subCategories: [
+        { title: 'New York', href: '/work/exhibitions/new-york' },
+        { title: 'Los Angeles', href: '/work/exhibitions/los-angeles' },
+        { title: 'London', href: '/work/exhibitions/london' },
+        { title: 'Paris', href: '/work/exhibitions/paris' }
+      ]
     },
     {
       title: 'Digital',
@@ -69,6 +75,18 @@ const Work = () => {
                     <h3 className="font-playfair text-2xl font-medium group-hover:text-primary transition-colors duration-300">
                       {category.title}
                     </h3>
+                    <p className="text-sm text-foreground/60 mt-2">
+                      {category.description}
+                    </p>
+                    {category.subCategories && (
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {category.subCategories.map((sub) => (
+                          <span key={sub.title} className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">
+                            {sub.title}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </a>
               ))}
