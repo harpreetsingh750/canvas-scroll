@@ -33,7 +33,6 @@ const Work = () => {
       const { data, error } = await supabase
         .from('products')
         .select('*')
-        .eq('on_sale', false)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
@@ -134,13 +133,28 @@ const Work = () => {
                         <h3 className="font-playfair text-xl font-medium">
                           {product.title}
                         </h3>
-                        {product.is_featured && (
-                          <Badge variant="default" className="ml-2">Featured</Badge>
-                        )}
+                        <div className="flex gap-2">
+                          {!product.on_sale && (
+                            <Badge variant="secondary">Not for sale</Badge>
+                          )}
+                          {product.is_featured && (
+                            <Badge variant="default">Featured</Badge>
+                          )}
+                        </div>
                       </div>
                       <p className="text-sm text-foreground/60 mb-1 capitalize">{product.category}</p>
                       {product.description && (
                         <p className="text-sm text-foreground/60 mb-4">{product.description}</p>
+                      )}
+                      {product.on_sale && (
+                        <div className="flex justify-between items-center">
+                          <span className="text-lg font-medium">
+                            ${product.price}
+                          </span>
+                          <Button size="sm" className="transition-all duration-300">
+                            Add to Cart
+                          </Button>
+                        </div>
                       )}
                     </div>
                   </Card>

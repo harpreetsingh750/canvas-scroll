@@ -47,9 +47,6 @@ const Footer = () => {
                 <a href="/work" className="block text-white/70 hover:text-white transition-colors duration-300">
                   Work
                 </a>
-                <a href="/shop" className="block text-white/70 hover:text-white transition-colors duration-300">
-                  Shop
-                </a>
                 <a href="/info" className="block text-white/70 hover:text-white transition-colors duration-300">
                   Info
                 </a>

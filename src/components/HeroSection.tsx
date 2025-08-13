@@ -51,10 +51,10 @@ const HeroSection = () => {
               View Work
             </a>
             <a
-              href="/shop"
+              href="/work"
               className="px-8 py-3 bg-gold/90 text-charcoal border border-gold hover:bg-gold transition-all duration-300 text-sm tracking-wide uppercase font-medium"
             >
-              Shop Collection
+              View Collection
             </a>
           </div>
         </div>
