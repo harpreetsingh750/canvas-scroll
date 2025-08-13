@@ -115,7 +115,7 @@ const Work = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProducts.map((product) => (
                   <Card key={product.id} className="group overflow-hidden hover-scale animate-fade-in">
-                    <div className="aspect-square overflow-hidden">
+                    <div className="aspect-square overflow-hidden relative">
                       {product.image_url ? (
                         <img
                           src={product.image_url}
@@ -127,20 +127,22 @@ const Work = () => {
                           <p className="text-foreground/50">No image</p>
                         </div>
                       )}
+                      {!product.on_sale && (
+                        <div className="absolute top-2 right-2">
+                          <Badge variant="secondary" className="bg-background/80 backdrop-blur-sm">
+                            Not for sale
+                          </Badge>
+                        </div>
+                      )}
                     </div>
                     <div className="p-6">
                       <div className="flex justify-between items-start mb-2">
                         <h3 className="font-playfair text-xl font-medium">
                           {product.title}
                         </h3>
-                        <div className="flex gap-2">
-                          {!product.on_sale && (
-                            <Badge variant="secondary">Not for sale</Badge>
-                          )}
-                          {product.is_featured && (
-                            <Badge variant="default">Featured</Badge>
-                          )}
-                        </div>
+                        {product.is_featured && (
+                          <Badge variant="default">Featured</Badge>
+                        )}
                       </div>
                       <p className="text-sm text-foreground/60 mb-1 capitalize">{product.category}</p>
                       {product.description && (
