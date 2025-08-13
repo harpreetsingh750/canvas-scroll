@@ -53,7 +53,7 @@ const Shop = () => {
     { key: 'sculpture', label: 'Sculptures' },
     { key: 'photography', label: 'Photography' },
     { key: 'mixed-media', label: 'Mixed Media' },
-    { key: 'print', label: 'Prints' }
+    { key: 'exhibitions', label: 'Exhibitions' }
   ];
 
   const filteredProducts = filter === 'all' 
