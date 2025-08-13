@@ -49,8 +49,8 @@ const AboutSection = () => {
               <div className="relative">
                 <div className="aspect-[4/5] bg-gradient-to-br from-muted to-accent/20 rounded-sm overflow-hidden">
                   <img
-                    src="/lovable-uploads/583e75ed-7514-4a3e-b113-ef949e079211.png"
-                    alt="Artist portrait in studio with monochrome abstract paintings"
+                    src="/lovable-uploads/ab814d1f-f45c-47d1-a13b-aff7a75526a0.png"
+                    alt="Artist portrait outdoors wearing Metallica t-shirt"
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover"
