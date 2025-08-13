@@ -15,6 +15,7 @@ interface Product {
   category: string;
   image_url: string | null;
   is_featured: boolean;
+  on_sale: boolean;
 }
 
 const Shop = () => {
@@ -141,10 +142,14 @@ const Shop = () => {
                         <p className="text-sm text-foreground/60 mb-4">{product.description}</p>
                       )}
                       <div className="flex justify-between items-center">
-                        <span className="text-lg font-medium">${product.price}</span>
-                        <Button size="sm" className="transition-all duration-300">
-                          Add to Cart
-                        </Button>
+                        <span className="text-lg font-medium">
+                          {product.on_sale ? `$${product.price}` : 'Not for sale'}
+                        </span>
+                        {product.on_sale && (
+                          <Button size="sm" className="transition-all duration-300">
+                            Add to Cart
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </Card>

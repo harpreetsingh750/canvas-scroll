@@ -23,6 +23,7 @@ interface Product {
   image_url: string | null;
   image_path: string | null;
   is_featured: boolean;
+  on_sale: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -36,7 +37,8 @@ export default function Admin() {
     description: "",
     price: "",
     category: "painting",
-    is_featured: false
+    is_featured: false,
+    on_sale: false
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -133,7 +135,8 @@ export default function Admin() {
         price: parseFloat(formData.price),
         category: formData.category,
         image_url: imageUrl,
-        is_featured: formData.is_featured
+        is_featured: formData.is_featured,
+        on_sale: formData.on_sale
       };
 
       if (editingProduct) {
@@ -207,7 +210,8 @@ export default function Admin() {
       description: product.description || "",
       price: product.price.toString(),
       category: product.category,
-      is_featured: product.is_featured
+      is_featured: product.is_featured,
+      on_sale: product.on_sale
     });
     setImagePreview(product.image_url);
   };
@@ -219,7 +223,8 @@ export default function Admin() {
       description: "",
       price: "",
       category: "painting",
-      is_featured: false
+      is_featured: false,
+      on_sale: false
     });
     setImageFile(null);
     setImagePreview(null);
@@ -328,9 +333,12 @@ export default function Admin() {
                               <p className="text-muted-foreground text-sm mb-2">{product.description}</p>
                               <div className="flex items-center gap-2">
                                 <Badge variant="secondary">{product.category}</Badge>
-                                {product.is_featured && (
-                                  <Badge variant="default">Featured</Badge>
-                                )}
+                                 {product.is_featured && (
+                                   <Badge variant="default">Featured</Badge>
+                                 )}
+                                 {product.on_sale && (
+                                   <Badge variant="secondary">On Sale</Badge>
+                                 )}
                               </div>
                             </div>
                             <div className="text-right">
@@ -449,15 +457,28 @@ export default function Admin() {
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="featured"
-                        checked={formData.is_featured}
-                        onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })}
-                        className="rounded"
-                      />
-                      <Label htmlFor="featured">Featured Product</Label>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="checkbox"
+                          id="featured"
+                          checked={formData.is_featured}
+                          onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })}
+                          className="rounded"
+                        />
+                        <Label htmlFor="featured">Featured Product</Label>
+                      </div>
+                      
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="checkbox"
+                          id="on_sale"
+                          checked={formData.on_sale}
+                          onChange={(e) => setFormData({ ...formData, on_sale: e.target.checked })}
+                          className="rounded"
+                        />
+                        <Label htmlFor="on_sale">On Sale</Label>
+                      </div>
                     </div>
                   </div>
 
