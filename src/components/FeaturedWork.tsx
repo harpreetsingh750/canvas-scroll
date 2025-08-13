@@ -1,66 +1,32 @@
-import { useState, useEffect } from 'react';
+import sculptureImage from '@/assets/sculpture-1.jpg';
+import paintingImage from '@/assets/painting-1.jpg';
+import photoImage from '@/assets/photo-1.jpg';
 import AnimatedUnderlineHeading from '@/components/AnimatedUnderlineHeading';
-import { supabase } from '@/integrations/supabase/client';
-
-interface Product {
-  id: string;
-  title: string;
-  description: string | null;
-  price: number;
-  category: string;
-  image_url: string | null;
-  is_featured: boolean;
-  on_sale: boolean;
-}
 
 const FeaturedWork = () => {
-  const [artworks, setArtworks] = useState<Product[]>([]);
-
-  useEffect(() => {
-    fetchFeaturedProducts();
-  }, []);
-
-  const fetchFeaturedProducts = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('is_featured', true);
-
-      if (error) throw error;
-
-      if (data && data.length > 0) {
-        // Select 3 random products, preferring different categories
-        const selected = selectRandomProductsByCategory(data);
-        setArtworks(selected);
-      }
-    } catch (error) {
-      console.error('Error fetching featured products:', error);
+  const artworks = [
+    {
+      id: 1,
+      title: "Bronze Meditation",
+      category: "Sculpture",
+      image: sculptureImage,
+      price: "$2,400"
+    },
+    {
+      id: 2,
+      title: "Earth & Gold",
+      category: "Painting",
+      image: paintingImage,
+      price: "$1,800"
+    },
+    {
+      id: 3,
+      title: "Light Studies II",
+      category: "Photography",
+      image: photoImage,
+      price: "$600"
     }
-  };
-
-  const selectRandomProductsByCategory = (products: Product[]): Product[] => {
-    const categories = new Set<string>();
-    const selected: Product[] = [];
-    const shuffled = [...products].sort(() => Math.random() - 0.5);
-
-    // First pass: try to get one from each different category
-    for (const product of shuffled) {
-      if (!categories.has(product.category) && selected.length < 3) {
-        categories.add(product.category);
-        selected.push(product);
-      }
-    }
-
-    // Second pass: fill remaining slots if needed
-    for (const product of shuffled) {
-      if (selected.length < 3 && !selected.some(p => p.id === product.id)) {
-        selected.push(product);
-      }
-    }
-
-    return selected.slice(0, 3);
-  };
+  ];
 
   return (
     <section className="py-24 md:py-32 section-padding">
@@ -86,17 +52,11 @@ const FeaturedWork = () => {
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="relative overflow-hidden bg-muted artwork-hover">
-                {artwork.image_url ? (
-                  <img
-                    src={artwork.image_url}
-                    alt={artwork.title}
-                    className="w-full aspect-square object-cover"
-                  />
-                ) : (
-                  <div className="w-full aspect-square bg-muted flex items-center justify-center">
-                    <p className="text-foreground/50">No image</p>
-                  </div>
-                )}
+                <img
+                  src={artwork.image}
+                  alt={artwork.title}
+                  className="w-full aspect-square object-cover"
+                />
                 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-all duration-500 flex items-center justify-center">
@@ -117,9 +77,7 @@ const FeaturedWork = () => {
                       {artwork.category}
                     </p>
                   </div>
-                  {artwork.on_sale && (
-                    <p className="font-medium text-lg">${artwork.price}</p>
-                  )}
+                  <p className="font-medium text-lg">{artwork.price}</p>
                 </div>
               </div>
             </div>
