@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, ShoppingCart } from 'lucide-react';
+import { Menu, X, ShoppingCart, User } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, isAdmin } = useAuth();
 
   const navItems = [
     { name: 'Home', href: '/' },
@@ -36,10 +38,29 @@ const Navigation = () => {
               ))}
             </div>
             
-            {/* Cart Icon */}
-            <Button variant="ghost" size="sm" className="p-2">
-              <ShoppingCart size={18} />
-            </Button>
+            {/* Auth & Cart Icons */}
+            <div className="flex items-center space-x-2">
+              <Button variant="ghost" size="sm" className="p-2">
+                <ShoppingCart size={18} />
+              </Button>
+              
+              {user ? (
+                <div className="flex items-center space-x-2">
+                  {isAdmin && (
+                    <Button variant="ghost" size="sm" asChild>
+                      <a href="/admin">Admin</a>
+                    </Button>
+                  )}
+                  <Button variant="ghost" size="sm" className="p-2">
+                    <User size={18} />
+                  </Button>
+                </div>
+              ) : (
+                <Button variant="ghost" size="sm" asChild>
+                  <a href="/auth">Sign In</a>
+                </Button>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button & Cart */}
@@ -57,7 +78,7 @@ const Navigation = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+          {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden mt-6 pt-6 border-t border-border/50">
             <div className="flex flex-col space-y-4">
@@ -71,6 +92,31 @@ const Navigation = () => {
                   {item.name}
                 </a>
               ))}
+              
+              {user ? (
+                <>
+                  {isAdmin && (
+                    <a
+                      href="/admin"
+                      className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Admin
+                    </a>
+                  )}
+                  <span className="text-foreground/80 text-sm tracking-wide">
+                    {user.email}
+                  </span>
+                </>
+              ) : (
+                <a
+                  href="/auth"
+                  className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Sign In
+                </a>
+              )}
             </div>
           </div>
         )}

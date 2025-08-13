@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,9 +9,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Trash2, Edit, Upload, Save, X } from "lucide-react";
+import { Trash2, Edit, Upload, Save, X, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 interface Product {
   id: string;
@@ -39,13 +41,35 @@ export default function Admin() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  
+  const { user, isAdmin, signOut } = useAuth();
+  const navigate = useNavigate();
   const { toast } = useToast();
 
   const categories = ["painting", "sculpture", "photography", "mixed-media", "print"];
 
+  // Redirect if not authenticated or not admin
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    if (!user) {
+      navigate('/auth');
+      return;
+    }
+    if (user && !isAdmin) {
+      toast({
+        title: "Access Denied",
+        description: "You need admin privileges to access this page.",
+        variant: "destructive"
+      });
+      navigate('/');
+      return;
+    }
+  }, [user, isAdmin, navigate, toast]);
+
+  useEffect(() => {
+    if (user && isAdmin) {
+      fetchProducts();
+    }
+  }, [user, isAdmin]);
 
   const fetchProducts = async () => {
     try {
@@ -208,12 +232,28 @@ export default function Admin() {
     }
   };
 
-  if (loading) {
+  const handleSignOut = async () => {
+    const { error } = await signOut();
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to sign out",
+        variant: "destructive"
+      });
+    } else {
+      navigate('/');
+    }
+  };
+
+  // Show loading while checking authentication
+  if (loading || !user || !isAdmin) {
     return (
       <div className="min-h-screen bg-background">
         <Navigation />
         <div className="flex items-center justify-center min-h-[50vh]">
-          <div className="text-center">Loading...</div>
+          <div className="text-center">
+            {!user ? "Redirecting to login..." : !isAdmin ? "Checking permissions..." : "Loading..."}
+          </div>
         </div>
       </div>
     );
@@ -225,8 +265,16 @@ export default function Admin() {
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Product Management</h1>
-          <p className="text-muted-foreground">Manage your shop products and inventory</p>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-4xl font-bold mb-2">Product Management</h1>
+              <p className="text-muted-foreground">Manage your shop products and inventory</p>
+            </div>
+            <Button variant="outline" onClick={handleSignOut}>
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
+          </div>
         </div>
 
         <Tabs defaultValue="products" className="space-y-8">
@@ -376,7 +424,7 @@ export default function Admin() {
                           className="mb-4"
                         />
                         {imagePreview && (
-                          <div className="w-32 h-32 rounded-lg overflow-hidden bg-muted">
+                          <div className="w-32 h-32 rounded-lg overflow-lg bg-muted">
                             <img 
                               src={imagePreview} 
                               alt="Preview"
