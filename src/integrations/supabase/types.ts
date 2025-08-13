@@ -89,6 +89,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
+      validate_otp_with_expiry: {
+        Args: { token_hash: string; token_type: string; created_at?: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
