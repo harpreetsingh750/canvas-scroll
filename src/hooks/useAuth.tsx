@@ -55,7 +55,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAdminStatus = async (userId?: string) => {
     const currentUserId = userId || user?.id;
+    console.log('Checking admin status for user ID:', currentUserId);
+    
     if (!currentUserId) {
+      console.log('No user ID available, setting isAdmin to false');
       setIsAdmin(false);
       return;
     }
@@ -67,9 +70,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .eq('id', currentUserId)
         .single();
       
+      console.log('Admin check result:', { data, error });
+      
       if (!error && data) {
-        setIsAdmin(data.role === 'admin');
+        const adminStatus = data.role === 'admin';
+        console.log('Setting admin status to:', adminStatus);
+        setIsAdmin(adminStatus);
       } else {
+        console.log('Error or no data, setting isAdmin to false');
         setIsAdmin(false);
       }
     } catch (error) {

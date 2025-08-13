@@ -50,11 +50,16 @@ export default function Admin() {
 
   // Redirect if not authenticated or not admin
   useEffect(() => {
-    if (!user) {
+    console.log('Admin page auth check - user:', !!user, 'isAdmin:', isAdmin, 'loading:', loading);
+    
+    if (!user && !loading) {
+      console.log('No user, redirecting to /auth');
       navigate('/auth');
       return;
     }
-    if (user && !isAdmin) {
+    
+    if (user && !isAdmin && !loading) {
+      console.log('User exists but not admin, redirecting to /');
       toast({
         title: "Access Denied",
         description: "You need admin privileges to access this page.",
@@ -63,7 +68,7 @@ export default function Admin() {
       navigate('/');
       return;
     }
-  }, [user, isAdmin, navigate, toast]);
+  }, [user, isAdmin, loading, navigate, toast]);
 
   useEffect(() => {
     if (user && isAdmin) {
@@ -246,17 +251,26 @@ export default function Admin() {
   };
 
   // Show loading while checking authentication
-  if (loading || !user || !isAdmin) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-background">
         <Navigation />
         <div className="flex items-center justify-center min-h-[50vh]">
           <div className="text-center">
-            {!user ? "Redirecting to login..." : !isAdmin ? "Checking permissions..." : "Loading..."}
+            <div className="text-lg">Loading admin panel...</div>
+            <div className="text-sm text-muted-foreground mt-2">
+              User: {user ? 'Authenticated' : 'Not authenticated'} | 
+              Admin: {isAdmin ? 'Yes' : 'No'}
+            </div>
           </div>
         </div>
       </div>
     );
+  }
+
+  // Don't render admin panel until we have user and admin status
+  if (!user || !isAdmin) {
+    return null; // This prevents flash of content before redirect
   }
 
   return (
