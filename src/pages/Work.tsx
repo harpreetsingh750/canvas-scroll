@@ -1,39 +1,66 @@
+import { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+
+interface Product {
+  id: string;
+  title: string;
+  description: string | null;
+  price: number;
+  category: string;
+  image_url: string | null;
+  is_featured: boolean;
+  on_sale: boolean;
+}
 
 const Work = () => {
-  const categories = [
-    {
-      title: 'Exhibitions',
-      description: 'Curated gallery exhibitions and shows by location',
-      image: '/lovable-uploads/609cb6fa-3b36-4459-8991-a954aac943ca.png',
-      href: '/work/exhibitions',
-      subCategories: [
-        { title: 'New York', href: '/work/exhibitions/new-york' },
-        { title: 'Los Angeles', href: '/work/exhibitions/los-angeles' },
-        { title: 'London', href: '/work/exhibitions/london' },
-        { title: 'Paris', href: '/work/exhibitions/paris' }
-      ]
-    },
-    {
-      title: 'Digital',
-      description: 'Digital art and photography',
-      image: '/lovable-uploads/f08a1944-4b3b-401f-ab20-2f7eb5aa9589.png',
-      href: '/work/digital'
-    },
-    {
-      title: 'Crafts',
-      description: 'Handcrafted sculptural and textile works',
-      image: '/lovable-uploads/04ae5092-394f-47d6-983b-dbfc48fa6dcb.png',
-      href: '/work/crafts'
-    },
-    {
-      title: 'Paintings',
-      description: 'Original acrylic and oil paintings',
-      image: '/lovable-uploads/50c9cae5-a3b8-4355-b9ac-47d62cdc49ef.png',
-      href: '/work/paintings'
+  const [filter, setFilter] = useState('all');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('on_sale', false)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setProducts(data || []);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to fetch products",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const categories = [
+    { key: 'all', label: 'View All' },
+    { key: 'painting', label: 'Paintings' },
+    { key: 'sculpture', label: 'Sculptures' },
+    { key: 'photography', label: 'Photography' },
+    { key: 'mixed-media', label: 'Mixed Media' },
+    { key: 'exhibitions', label: 'Exhibitions' }
   ];
+
+  const filteredProducts = filter === 'all' 
+    ? products 
+    : products.filter(product => product.category === filter);
 
   return (
     <div className="min-h-screen bg-background">
@@ -52,45 +79,74 @@ const Work = () => {
           </div>
         </section>
 
-        {/* Categories Grid */}
-        <section className="section-padding pb-20">
+        {/* Filter Buttons */}
+        <section className="section-padding pb-12">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-              {categories.map((category, index) => (
-                <a
-                  key={category.title}
-                  href={category.href}
-                  className="group block overflow-hidden bg-card rounded-lg hover-scale"
+            <div className="flex flex-wrap justify-center gap-4 mb-16">
+              {categories.map((category) => (
+                <Button
+                  key={category.key}
+                  variant={filter === category.key ? 'default' : 'outline'}
+                  onClick={() => setFilter(category.key)}
+                  className="transition-all duration-300"
                 >
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img
-                      src={category.image}
-                      alt={category.title}
-                      className={`w-full h-full transition-transform duration-700 group-hover:scale-110 ${
-                        category.title === 'Crafts' ? 'object-contain bg-card' : 'object-cover'
-                      }`}
-                    />
-                  </div>
-                  <div className="p-8">
-                    <h3 className="font-playfair text-2xl font-medium group-hover:text-primary transition-colors duration-300">
-                      {category.title}
-                    </h3>
-                    <p className="text-sm text-foreground/60 mt-2">
-                      {category.description}
-                    </p>
-                    {category.subCategories && (
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {category.subCategories.map((sub) => (
-                          <span key={sub.title} className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">
-                            {sub.title}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </a>
+                  {category.label}
+                </Button>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Products Grid */}
+        <section className="section-padding pb-20">
+          <div className="max-w-7xl mx-auto">
+            {loading ? (
+              <div className="flex items-center justify-center min-h-[50vh]">
+                <div className="text-center">
+                  <p className="text-foreground/70">Loading artworks...</p>
+                </div>
+              </div>
+            ) : filteredProducts.length === 0 ? (
+              <div className="flex items-center justify-center min-h-[50vh]">
+                <div className="text-center">
+                  <p className="text-foreground/70">No artworks found in this category.</p>
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProducts.map((product) => (
+                  <Card key={product.id} className="group overflow-hidden hover-scale animate-fade-in">
+                    <div className="aspect-square overflow-hidden">
+                      {product.image_url ? (
+                        <img
+                          src={product.image_url}
+                          alt={product.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-muted flex items-center justify-center">
+                          <p className="text-foreground/50">No image</p>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-6">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="font-playfair text-xl font-medium">
+                          {product.title}
+                        </h3>
+                        {product.is_featured && (
+                          <Badge variant="default" className="ml-2">Featured</Badge>
+                        )}
+                      </div>
+                      <p className="text-sm text-foreground/60 mb-1 capitalize">{product.category}</p>
+                      {product.description && (
+                        <p className="text-sm text-foreground/60 mb-4">{product.description}</p>
+                      )}
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>

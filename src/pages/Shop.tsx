@@ -33,6 +33,7 @@ const Shop = () => {
       const { data, error } = await supabase
         .from('products')
         .select('*')
+        .eq('on_sale', true)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
