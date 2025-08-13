@@ -30,7 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // Check admin status when session changes
         if (session?.user) {
           setTimeout(() => {
-            checkAdminStatus();
+            checkAdminStatus(session.user.id);
           }, 0);
         } else {
           setIsAdmin(false);
@@ -45,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        checkAdminStatus();
+        checkAdminStatus(session.user.id);
       }
       setLoading(false);
     });
@@ -53,16 +53,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  const checkAdminStatus = async () => {
+  const checkAdminStatus = async (userId?: string) => {
+    const currentUserId = userId || user?.id;
+    if (!currentUserId) {
+      setIsAdmin(false);
+      return;
+    }
+    
     try {
       const { data, error } = await supabase
         .from('profiles')
         .select('role')
-        .eq('id', user?.id)
+        .eq('id', currentUserId)
         .single();
       
       if (!error && data) {
         setIsAdmin(data.role === 'admin');
+      } else {
+        setIsAdmin(false);
       }
     } catch (error) {
       console.error('Error checking admin status:', error);
