@@ -33,14 +33,18 @@ const Work = () => {
 
   const fetchProducts = async () => {
     try {
+      console.log('Fetching products...');
       const { data, error } = await supabase
         .from('products')
         .select('*')
         .order('created_at', { ascending: false });
 
+      console.log('Supabase response:', { data, error });
       if (error) throw error;
+      console.log('Products fetched:', data?.length || 0);
       setProducts(data || []);
     } catch (error) {
+      console.error('Error fetching products:', error);
       toast({
         title: "Error",
         description: "Failed to fetch products",
