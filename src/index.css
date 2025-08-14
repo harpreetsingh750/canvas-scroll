@@ -9,7 +9,7 @@
 @layer base {
   :root {
     /* Gallery aesthetic - clean whites and deep blacks */
-    --background: 0 0% 99%;
+    --background: 0 0% 96%;
     --foreground: 0 0% 8%;
 
     --card: 0 0% 100%;
