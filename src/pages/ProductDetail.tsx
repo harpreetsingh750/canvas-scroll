@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Heart, Share2 } from 'lucide-react';
+import { AddToCartButton } from '@/components/AddToCartButton';
 
 interface Product {
   id: string;
@@ -69,12 +70,6 @@ const ProductDetail = () => {
     }
   };
 
-  const handleAddToCart = () => {
-    toast({
-      title: "Added to Cart",
-      description: `${product?.title} has been added to your cart.`
-    });
-  };
 
   if (!id) {
     return <Navigate to="/work" replace />;
@@ -272,13 +267,12 @@ const ProductDetail = () => {
                 {/* Action Buttons */}
                 <div className="space-y-4 pt-6">
                   {product.on_sale ? (
-                    <Button 
-                      onClick={handleAddToCart}
+                    <AddToCartButton 
+                      productId={product.id}
                       className="w-full transition-all duration-300"
                       size="lg"
-                    >
-                      Add to Cart
-                    </Button>
+                      showQuantityControls
+                    />
                   ) : (
                     <div className="text-center p-4 bg-muted rounded-lg">
                       <p className="text-foreground/60">This piece is not currently for sale</p>

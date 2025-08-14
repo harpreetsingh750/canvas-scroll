@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, ShoppingCart, User } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { CartDrawer } from './CartDrawer';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,9 +41,7 @@ const Navigation = () => {
             
             {/* Auth & Cart Icons */}
             <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="sm" className="p-2">
-                <ShoppingCart size={18} />
-              </Button>
+              <CartDrawer />
               
               {user ? (
                 <div className="flex items-center space-x-2">
@@ -65,9 +64,7 @@ const Navigation = () => {
 
           {/* Mobile Menu Button & Cart */}
           <div className="md:hidden flex items-center space-x-2">
-            <Button variant="ghost" size="sm" className="p-2">
-              <ShoppingCart size={18} />
-            </Button>
+            <CartDrawer />
             <Button
               variant="ghost"
               size="sm"

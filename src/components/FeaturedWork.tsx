@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import AnimatedUnderlineHeading from '@/components/AnimatedUnderlineHeading';
 import { Badge } from '@/components/ui/badge';
+import { AddToCartButton } from '@/components/AddToCartButton';
 
 interface Product {
   id: string;
@@ -138,6 +139,16 @@ const FeaturedWork = () => {
                     <p className="font-medium text-lg">${product.price}</p>
                   )}
                 </div>
+                {product.on_sale && (
+                  <div className="mt-4" onClick={(e) => e.stopPropagation()}>
+                    <AddToCartButton 
+                      productId={product.id} 
+                      variant="outline" 
+                      size="sm"
+                      className="w-full"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           ))}
