@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import AnimatedUnderlineHeading from '@/components/AnimatedUnderlineHeading';
 import { Badge } from '@/components/ui/badge';
@@ -17,6 +18,7 @@ interface Product {
 const FeaturedWork = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchFeaturedProducts();
@@ -88,8 +90,9 @@ const FeaturedWork = () => {
           {products.map((product, index) => (
             <div
               key={product.id}
-              className="group smooth-reveal revealed"
+              className="group smooth-reveal revealed cursor-pointer"
               style={{ animationDelay: `${index * 0.2}s` }}
+              onClick={() => navigate(`/work/${product.id}`)}
             >
               <div className="relative overflow-hidden bg-muted artwork-hover">
                 {product.image_url ? (
@@ -113,9 +116,9 @@ const FeaturedWork = () => {
                 )}
                 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-all duration-500 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-center text-white">
-                    <button className="px-6 py-2 border border-white/50 text-sm tracking-wide uppercase hover:bg-white/10 transition-colors duration-300">
+                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 transition-all duration-500 flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-center">
+                    <button className="px-6 py-2 border border-foreground/50 text-sm tracking-wide uppercase hover:bg-foreground/10 transition-colors duration-300">
                       View Details
                     </button>
                   </div>

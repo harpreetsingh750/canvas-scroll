@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,7 @@ const Work = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProducts();
@@ -114,8 +116,11 @@ const Work = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProducts.map((product) => (
-                  <Card key={product.id} className="group overflow-hidden hover-scale animate-fade-in">
-                    <div className="aspect-square overflow-hidden relative">
+                  <Card key={product.id} className="group overflow-hidden hover-scale animate-fade-in cursor-pointer">
+                    <div 
+                      className="aspect-square overflow-hidden relative"
+                      onClick={() => navigate(`/work/${product.id}`)}
+                    >
                       {product.image_url ? (
                         <img
                           src={product.image_url}
@@ -134,6 +139,14 @@ const Work = () => {
                           </Badge>
                         </div>
                       )}
+                      {/* View Details Overlay */}
+                      <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 transition-all duration-500 flex items-center justify-center">
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-center">
+                          <button className="px-6 py-2 border border-foreground/50 text-sm tracking-wide uppercase hover:bg-foreground/10 transition-colors duration-300">
+                            View Details
+                          </button>
+                        </div>
+                      </div>
                     </div>
                     <div className="p-6">
                       <div className="flex justify-between items-start mb-2">
