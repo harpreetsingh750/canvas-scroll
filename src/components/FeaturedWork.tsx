@@ -7,21 +7,21 @@ const FeaturedWork = () => {
   const artworks = [
     {
       id: 1,
-      title: "Bronze Meditation",
+      title: "Through the Storm",
       category: "Sculpture",
       image: sculptureImage,
       price: "$2,400"
     },
     {
       id: 2,
-      title: "Earth & Gold",
+      title: "Agni",
       category: "Painting",
       image: paintingImage,
       price: "$1,800"
     },
     {
       id: 3,
-      title: "Light Studies II",
+      title: "Graffiti Glow",
       category: "Photography",
       image: photoImage,
       price: "$600"
