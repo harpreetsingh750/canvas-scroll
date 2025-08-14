@@ -24,7 +24,7 @@ const FeaturedWork = () => {
 
   const fetchFeaturedProducts = async () => {
     try {
-      const targetTitles = ['Through the Storm', 'Agni', 'Graffiti Glow'];
+      const targetTitles = ['Through the Storm', 'Agni – Wooden Wall Decorative', 'Graffiti Glow'];
       
       const { data, error } = await supabase
         .from('products')
