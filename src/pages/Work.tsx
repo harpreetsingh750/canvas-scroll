@@ -61,7 +61,7 @@ const Work = () => {
 
   const filteredProducts = filter === 'all' 
     ? products 
-    : products.filter(product => product.category === filter);
+    : products.filter(product => product.category.toLowerCase() === filter);
 
   return (
     <div className="min-h-screen bg-background">
