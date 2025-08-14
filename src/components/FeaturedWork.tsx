@@ -1,32 +1,72 @@
-import sculptureImage from '@/assets/sculpture-1.jpg';
-import paintingImage from '@/assets/painting-1.jpg';
-import photoImage from '@/assets/photo-1.jpg';
+import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 import AnimatedUnderlineHeading from '@/components/AnimatedUnderlineHeading';
+import { Badge } from '@/components/ui/badge';
+
+interface Product {
+  id: string;
+  title: string;
+  description: string | null;
+  price: number;
+  category: string;
+  image_url: string | null;
+  is_featured: boolean;
+  on_sale: boolean;
+}
 
 const FeaturedWork = () => {
-  const artworks = [
-    {
-      id: 1,
-      title: "Through the Storm",
-      category: "Sculpture",
-      image: sculptureImage,
-      price: "$2,400"
-    },
-    {
-      id: 2,
-      title: "Agni",
-      category: "Painting",
-      image: paintingImage,
-      price: "$1,800"
-    },
-    {
-      id: 3,
-      title: "Graffiti Glow",
-      category: "Photography",
-      image: photoImage,
-      price: "$600"
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchFeaturedProducts();
+  }, []);
+
+  const fetchFeaturedProducts = async () => {
+    try {
+      const targetTitles = ['Through the Storm', 'Agni', 'Graffiti Glow'];
+      
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .in('title', targetTitles);
+
+      if (error) throw error;
+      
+      // Order the products to match the desired order
+      const orderedProducts = targetTitles
+        .map(title => data?.find(product => product.title === title))
+        .filter(Boolean) as Product[];
+      
+      setProducts(orderedProducts);
+    } catch (error) {
+      console.error('Error fetching featured products:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  if (loading) {
+    return (
+      <section className="py-24 md:py-32 section-padding">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 md:mb-20">
+            <AnimatedUnderlineHeading
+              text="Featured Work"
+              level="h2"
+              className="text-4xl md:text-5xl font-playfair font-light mb-6 smooth-reveal"
+            />
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto smooth-reveal">
+              A curated selection of recent pieces exploring contemporary themes through traditional craftsmanship
+            </p>
+          </div>
+          <div className="flex items-center justify-center min-h-[300px]">
+            <p className="text-muted-foreground">Loading featured work...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-24 md:py-32 section-padding">
@@ -45,18 +85,32 @@ const FeaturedWork = () => {
 
         {/* Gallery Grid */}
         <div className="gallery-grid">
-          {artworks.map((artwork, index) => (
+          {products.map((product, index) => (
             <div
-              key={artwork.id}
+              key={product.id}
               className="group smooth-reveal"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="relative overflow-hidden bg-muted artwork-hover">
-                <img
-                  src={artwork.image}
-                  alt={artwork.title}
-                  className="w-full aspect-square object-cover"
-                />
+                {product.image_url ? (
+                  <img
+                    src={product.image_url}
+                    alt={product.title}
+                    className="w-full aspect-square object-cover"
+                  />
+                ) : (
+                  <div className="w-full aspect-square bg-muted flex items-center justify-center">
+                    <p className="text-muted-foreground">No image</p>
+                  </div>
+                )}
+                
+                {!product.on_sale && (
+                  <div className="absolute top-2 right-2">
+                    <Badge variant="secondary" className="bg-background/80 backdrop-blur-sm">
+                      Not for sale
+                    </Badge>
+                  </div>
+                )}
                 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-all duration-500 flex items-center justify-center">
@@ -72,12 +126,14 @@ const FeaturedWork = () => {
               <div className="mt-6 space-y-2">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="font-playfair text-xl mb-1">{artwork.title}</h3>
-                    <p className="text-muted-foreground text-sm tracking-wide uppercase">
-                      {artwork.category}
+                    <h3 className="font-playfair text-xl mb-1">{product.title}</h3>
+                    <p className="text-muted-foreground text-sm tracking-wide capitalize">
+                      {product.category}
                     </p>
                   </div>
-                  <p className="font-medium text-lg">{artwork.price}</p>
+                  {product.on_sale && (
+                    <p className="font-medium text-lg">${product.price}</p>
+                  )}
                 </div>
               </div>
             </div>
