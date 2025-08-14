@@ -48,7 +48,7 @@ export default function Admin() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const categories = ["painting", "sculpture", "photography", "mixed-media", "print"];
+  const categories = ["painting", "sculpture", "photography", "mixed-media", "print", "exhibitions"];
 
   // Redirect if not authenticated or not admin
   useEffect(() => {
