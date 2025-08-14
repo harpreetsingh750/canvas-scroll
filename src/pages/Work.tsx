@@ -68,6 +68,11 @@ const Work = () => {
     ? products 
     : products.filter(product => product.category === filter);
 
+  console.log('Current filter:', filter);
+  console.log('Products:', products.length);
+  console.log('Filtered products:', filteredProducts.length);
+  console.log('Product categories:', products.map(p => p.category));
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
