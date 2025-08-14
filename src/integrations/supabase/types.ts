@@ -16,76 +16,46 @@ export type Database = {
     Tables: {
       products: {
         Row: {
-          availability_status: string | null
-          care_instructions: string | null
           category: string
           created_at: string
           description: string | null
-          dimensions: string | null
-          edition_size: number | null
-          frame_included: boolean | null
           id: string
           image_path: string | null
           image_url: string | null
           is_featured: boolean | null
           location: string | null
-          materials: string | null
-          medium: string | null
           on_sale: boolean
           price: number
-          shipping_info: string | null
           title: string
           updated_at: string
-          weight: number | null
-          year_created: number | null
         }
         Insert: {
-          availability_status?: string | null
-          care_instructions?: string | null
           category: string
           created_at?: string
           description?: string | null
-          dimensions?: string | null
-          edition_size?: number | null
-          frame_included?: boolean | null
           id?: string
           image_path?: string | null
           image_url?: string | null
           is_featured?: boolean | null
           location?: string | null
-          materials?: string | null
-          medium?: string | null
           on_sale?: boolean
           price: number
-          shipping_info?: string | null
           title: string
           updated_at?: string
-          weight?: number | null
-          year_created?: number | null
         }
         Update: {
-          availability_status?: string | null
-          care_instructions?: string | null
           category?: string
           created_at?: string
           description?: string | null
-          dimensions?: string | null
-          edition_size?: number | null
-          frame_included?: boolean | null
           id?: string
           image_path?: string | null
           image_url?: string | null
           is_featured?: boolean | null
           location?: string | null
-          materials?: string | null
-          medium?: string | null
           on_sale?: boolean
           price?: number
-          shipping_info?: string | null
           title?: string
           updated_at?: string
-          weight?: number | null
-          year_created?: number | null
         }
         Relationships: []
       }
