@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -6,6 +7,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { Eye } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -19,6 +21,7 @@ interface Product {
 }
 
 const Work = () => {
+  const navigate = useNavigate();
   const [filter, setFilter] = useState('all');
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -148,16 +151,29 @@ const Work = () => {
                       {product.description && (
                         <p className="text-sm text-foreground/60 mb-4">{product.description}</p>
                       )}
-                      {product.on_sale && (
-                        <div className="flex justify-between items-center">
+                      <div className="flex justify-between items-center">
+                        {product.on_sale && (
                           <span className="text-lg font-medium">
                             ${product.price}
                           </span>
-                          <Button size="sm" className="transition-all duration-300">
-                            Add to Cart
+                        )}
+                        <div className="flex gap-2 ml-auto">
+                          <Button 
+                            size="sm" 
+                            variant="outline"
+                            onClick={() => navigate(`/work/${product.id}`)}
+                            className="transition-all duration-300"
+                          >
+                            <Eye className="w-4 h-4 mr-1" />
+                            View Details
                           </Button>
+                          {product.on_sale && (
+                            <Button size="sm" className="transition-all duration-300">
+                              Add to Cart
+                            </Button>
+                          )}
                         </div>
-                      )}
+                      </div>
                     </div>
                   </Card>
                 ))}
