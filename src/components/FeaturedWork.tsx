@@ -88,7 +88,7 @@ const FeaturedWork = () => {
           {products.map((product, index) => (
             <div
               key={product.id}
-              className="group smooth-reveal"
+              className="group smooth-reveal revealed"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="relative overflow-hidden bg-muted artwork-hover">
