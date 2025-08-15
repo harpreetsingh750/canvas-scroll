@@ -21,8 +21,12 @@ const Navigation = () => {
       <div className="section-padding py-6">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <a href="/" className="font-playfair text-2xl font-medium tracking-wide">
-            KJ Arts
+          <a href="/" className="flex items-center">
+            <img 
+              src="/lovable-uploads/5c3f3784-1c9c-4f15-a8da-b9607793dbfc.png" 
+              alt="KJ Arts Logo" 
+              className="h-8 w-auto"
+            />
           </a>
 
           {/* Desktop Navigation */}
