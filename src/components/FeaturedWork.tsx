@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import AnimatedUnderlineHeading from '@/components/AnimatedUnderlineHeading';
 import { Badge } from '@/components/ui/badge';
@@ -156,15 +156,15 @@ const FeaturedWork = () => {
 
         {/* View All Link */}
         <div className="text-center mt-16">
-          <a
-            href="/work"
+          <Link
+            to="/work"
             className="inline-flex items-center text-foreground hover:text-accent-foreground transition-colors duration-300 group"
           >
             <span className="text-lg tracking-wide mr-2">View All Work</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover:translate-x-1 transition-transform duration-300">
               <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
