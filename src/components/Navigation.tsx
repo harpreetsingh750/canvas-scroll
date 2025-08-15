@@ -25,7 +25,7 @@ const Navigation = () => {
             <img 
               src="/lovable-uploads/5c3f3784-1c9c-4f15-a8da-b9607793dbfc.png" 
               alt="KJ Arts Logo" 
-              className="h-8 w-auto"
+              className="h-10 w-auto"
             />
           </a>
 
