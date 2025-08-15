@@ -37,7 +37,7 @@ const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
+                  className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-base tracking-wide"
                 >
                   {item.name}
                 </Link>
@@ -88,7 +88,7 @@ const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
+                  className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-base tracking-wide"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
@@ -100,20 +100,20 @@ const Navigation = () => {
                   {isAdmin && (
                     <Link
                       to="/admin"
-                      className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
+                      className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-base tracking-wide"
                       onClick={() => setIsOpen(false)}
                     >
                       Admin
                     </Link>
                   )}
-                  <span className="text-foreground/80 text-sm tracking-wide">
+                  <span className="text-foreground/80 text-base tracking-wide">
                     {user.email}
                   </span>
                 </>
               ) : (
                 <Link
                   to="/auth"
-                  className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
+                  className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-base tracking-wide"
                   onClick={() => setIsOpen(false)}
                 >
                   Sign In
