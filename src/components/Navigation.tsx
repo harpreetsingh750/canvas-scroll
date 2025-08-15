@@ -23,9 +23,9 @@ const Navigation = () => {
           {/* Logo */}
           <a href="/" className="flex items-center">
             <img 
-              src="/lovable-uploads/5c3f3784-1c9c-4f15-a8da-b9607793dbfc.png" 
+              src="/lovable-uploads/88c93569-e5ac-4322-9a39-d19279517235.png" 
               alt="KJ Arts Logo" 
-              className="h-10 w-auto"
+              className="h-12 w-auto"
             />
           </a>
 
