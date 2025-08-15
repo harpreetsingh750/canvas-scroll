@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Menu, X, User } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { CartDrawer } from './CartDrawer';
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,25 +22,25 @@ const Navigation = () => {
       <div className="section-padding py-6">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <a href="/" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img 
               src="/lovable-uploads/88c93569-e5ac-4322-9a39-d19279517235.png" 
               alt="KJ Arts Logo" 
               className="h-12 w-auto"
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-8">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
             
@@ -51,7 +52,7 @@ const Navigation = () => {
                 <div className="flex items-center space-x-2">
                   {isAdmin && (
                     <Button variant="ghost" size="sm" asChild>
-                      <a href="/admin">Admin</a>
+                      <Link to="/admin">Admin</Link>
                     </Button>
                   )}
                   <Button variant="ghost" size="sm" className="p-2">
@@ -60,7 +61,7 @@ const Navigation = () => {
                 </div>
               ) : (
                 <Button variant="ghost" size="sm" asChild>
-                  <a href="/auth">Sign In</a>
+                  <Link to="/auth">Sign In</Link>
                 </Button>
               )}
             </div>
@@ -84,39 +85,39 @@ const Navigation = () => {
           <div className="md:hidden mt-6 pt-6 border-t border-border/50">
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
               
               {user ? (
                 <>
                   {isAdmin && (
-                    <a
-                      href="/admin"
+                    <Link
+                      to="/admin"
                       className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
                       onClick={() => setIsOpen(false)}
                     >
                       Admin
-                    </a>
+                    </Link>
                   )}
                   <span className="text-foreground/80 text-sm tracking-wide">
                     {user.email}
                   </span>
                 </>
               ) : (
-                <a
-                  href="/auth"
+                <Link
+                  to="/auth"
                   className="text-foreground/80 hover:text-foreground transition-colors duration-300 text-sm tracking-wide"
                   onClick={() => setIsOpen(false)}
                 >
                   Sign In
-                </a>
+                </Link>
               )}
             </div>
           </div>
